@@ -1,1 +1,7 @@
 Hello, World!
+<<<<<<< HEAD
+=======
+New line of text
+Third line of text
+C'est Justine
+>>>>>>> 16076724c7980fcfe5713465b04e0f16d37f9a82
