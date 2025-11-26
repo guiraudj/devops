@@ -1,0 +1,26 @@
+- name: Add NodeSource repository for Node.js 18
+  ansible.builtin.shell: curl -fsSL https://rpm.nodesource.com/setup_18.x | bash -
+  args:
+    executable: /bin/bash
+  become: true
+
+- name: Install Node.js
+  ansible.builtin.yum:
+    name: nodejs
+    state: present
+  become: true
+
+- name: Copy sample app
+  ansible.builtin.copy:
+    src: app.js
+    dest: /home/ec2-user/app.js
+    owner: ec2-user
+    group: ec2-user
+    mode: '0755'
+
+- name: Start sample app
+  ansible.builtin.shell: nohup node /home/ec2-user/app.js &
+  args:
+    chdir: /home/ec2-user/
+    creates: /tmp/node-app.pid
+  become: true
